@@ -136,6 +136,43 @@ const detectedAdblock = async () => {
 
 detectedAdblock().then(result => {
     if (result) {
-        window.location.href = "./disable-adblock";
+// Clear all existing elements in the body
+document.body.innerHTML = '';
+
+// Apply body styles
+document.body.style.cssText = `
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 24px;
+`;
+
+// Create container for the content
+const container = document.createElement('div');
+container.style.textAlign = 'center';
+
+// Create and add message text
+const message = document.createElement('p');
+message.textContent = 'Adblocker detected. Please disable your adblocker';
+
+// Create and add button
+const button = document.createElement('button');
+button.textContent = "I've disabled my ad blocker";
+button.style.cssText = `
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+`;
+button.onclick = () => location.reload();
+
+// Append elements to container and body
+container.appendChild(message);
+container.appendChild(button);
+document.body.appendChild(container);
     }
 });
